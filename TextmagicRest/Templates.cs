@@ -80,6 +80,8 @@ namespace TextmagicRest
             if (page.HasValue) request.AddQueryParameter("page", page.ToString());
             if (limit.HasValue) request.AddQueryParameter("limit", limit.ToString());
             if (ids != null && ids.Length > 0) request.AddQueryParameter("ids", string.Join(",", ids));
+            request.AddQueryParameter("name", name);
+            request.AddQueryParameter("content", content);
 
             return Execute<TemplatesResult>(request);
         }
