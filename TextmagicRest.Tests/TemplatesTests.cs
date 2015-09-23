@@ -47,7 +47,7 @@ namespace TextmagicRest.Tests
             var testClient = Common.CreateClient<Template>(content, null, null);
             client = new Client(testClient);
 
-            var template = client.GetTemplate(51335);
+            var template = client.GetTemplate(templateId);
 
             Assert.IsTrue(template.Success);
             Assert.AreEqual(templateId, template.Id);
@@ -68,7 +68,7 @@ namespace TextmagicRest.Tests
                 .Returns(new TemplatesResult());
             var client = mockClient.Object;
 
-            client.GetTemplates(2, 3);
+            client.GetTemplates(page, limit);
 
             mockClient.Verify(trc => trc.Execute<TemplatesResult>(It.IsAny<IRestRequest>()), Times.Once);
             Assert.IsNotNull(savedRequest);
@@ -87,7 +87,7 @@ namespace TextmagicRest.Tests
             var testClient = Common.CreateClient<TemplatesResult>(content, null, null);
             client = new Client(testClient);
 
-            var templates = client.GetTemplates(2, 3);
+            var templates = client.GetTemplates(page, limit);
 
             Assert.IsTrue(templates.Success);
             Assert.AreEqual(3, templates.Templates.Count);
@@ -122,7 +122,7 @@ namespace TextmagicRest.Tests
                 Name = templateName,
                 Content = templateContent,
             };
-            var link = client.UpdateTemplate(template);
+            client.UpdateTemplate(template);
 
             mockClient.Verify(trc => trc.Execute<LinkResult>(It.IsAny<IRestRequest>()), Times.Once);
             Assert.IsNotNull(savedRequest);
@@ -131,7 +131,18 @@ namespace TextmagicRest.Tests
             Assert.AreEqual(3, savedRequest.Parameters.Count);
             Assert.AreEqual(templateId.ToString(), savedRequest.Parameters.Find(x => x.Name == "id").Value);
             Assert.AreEqual(templateName, savedRequest.Parameters.Find(x => x.Name == "name").Value);
-            Assert.AreEqual(templateContent, savedRequest.Parameters.Find(x => x.Name == "body").Value);           
+            Assert.AreEqual(templateContent, savedRequest.Parameters.Find(x => x.Name == "body").Value);
+
+            var content = "{ \"id\": \"31337\", \"href\": \"/api/v2/contacts/31337\"}";
+
+            var testClient = Common.CreateClient<LinkResult>(content, null, null);
+            client = new Client(testClient);
+
+            var link = client.UpdateTemplate(template);
+
+            Assert.IsTrue(link.Success);
+            Assert.AreEqual(31337, link.Id);
+            Assert.AreEqual("/api/v2/contacts/31337", link.Href);
         }
 
         [Test]
@@ -143,7 +154,7 @@ namespace TextmagicRest.Tests
                 .Returns(new LinkResult());
             var client = mockClient.Object;
 
-            var link = client.CreateTemplate(templateName, templateContent);
+            client.CreateTemplate(templateName, templateContent);
 
             mockClient.Verify(trc => trc.Execute<LinkResult>(It.IsAny<IRestRequest>()), Times.Once);
             Assert.IsNotNull(savedRequest);
@@ -151,7 +162,18 @@ namespace TextmagicRest.Tests
             Assert.AreEqual(Method.POST, savedRequest.Method);
             Assert.AreEqual(2, savedRequest.Parameters.Count);
             Assert.AreEqual(templateName, savedRequest.Parameters.Find(x => x.Name == "name").Value);
-            Assert.AreEqual(templateContent, savedRequest.Parameters.Find(x => x.Name == "body").Value); 
+            Assert.AreEqual(templateContent, savedRequest.Parameters.Find(x => x.Name == "body").Value);
+            
+            var content = "{ \"id\": \"31337\", \"href\": \"/api/v2/contacts/31337\"}";
+
+            var testClient = Common.CreateClient<LinkResult>(content, null, null);
+            client = new Client(testClient);
+
+            var link = client.CreateTemplate(templateName, templateContent);
+
+            Assert.IsTrue(link.Success);
+            Assert.AreEqual(31337, link.Id);
+            Assert.AreEqual("/api/v2/contacts/31337", link.Href);
         }
 
         [Test]
@@ -170,7 +192,7 @@ namespace TextmagicRest.Tests
                 Content = templateContent,
             };
 
-            var result = client.DeleteTemplate(template);
+            client.DeleteTemplate(template);
 
             mockClient.Verify(trc => trc.Execute<DeleteResult>(It.IsAny<IRestRequest>()), Times.Once);
             Assert.IsNotNull(savedRequest);
@@ -178,6 +200,63 @@ namespace TextmagicRest.Tests
             Assert.AreEqual(Method.DELETE, savedRequest.Method);
             Assert.AreEqual(1, savedRequest.Parameters.Count);
             Assert.AreEqual(templateId.ToString(), savedRequest.Parameters.Find(x => x.Name == "id").Value);
+
+            var content = "{}";
+
+            var testClient = Common.CreateClient<DeleteResult>(content, null, null);
+            client = new Client(testClient);
+
+            var result = client.DeleteTemplate(template);
+
+            Assert.IsTrue(result.Success);
+        }
+
+        [Test]
+        public void ShouldSearchTemplates()
+        {
+            var page = 2;
+            var limit = 3;
+            int[] ids = {46};
+            string name = "my template";
+            string templateContent = "my template content";
+
+            IRestRequest savedRequest = null;
+            mockClient.Setup(trc => trc.Execute<TemplatesResult>(It.IsAny<IRestRequest>()))
+                .Callback<IRestRequest>((request) => savedRequest = request)
+                .Returns(new TemplatesResult());
+            var client = mockClient.Object;
+
+            client.SearchTemplates(page, limit, ids, name, templateContent);
+
+            mockClient.Verify(trc => trc.Execute<TemplatesResult>(It.IsAny<IRestRequest>()), Times.Once);
+            Assert.IsNotNull(savedRequest);
+            Assert.AreEqual("templates/search", savedRequest.Resource);
+            Assert.AreEqual(Method.GET, savedRequest.Method);
+            Assert.AreEqual(5, savedRequest.Parameters.Count);
+            Assert.AreEqual(page.ToString(), savedRequest.Parameters.Find(x => x.Name == "page").Value);
+            Assert.AreEqual(limit.ToString(), savedRequest.Parameters.Find(x => x.Name == "limit").Value);
+            Assert.AreEqual(name.ToString(), savedRequest.Parameters.Find(x => x.Name == "name").Value);
+            Assert.AreEqual(templateContent.ToString(), savedRequest.Parameters.Find(x => x.Name == "content").Value);
+
+            var content = "{ \"page\": 2,  \"limit\": 3, \"pageCount\": 1, \"resources\": ["
+                + "{ \"name\": \"my template\", \"id\": \"46\",  \"content\": \"my template content\", \"lastModified\": \"2015-05-07T06:05:55+0000\" }"
+                + "] }";
+
+            var testClient = Common.CreateClient<TemplatesResult>(content, null, null);
+            client = new Client(testClient);
+
+            var templates = client.SearchTemplates(page, limit, ids, name, templateContent);
+
+            Assert.IsTrue(templates.Success);
+            Assert.AreEqual(1, templates.Templates.Count);
+            Assert.AreEqual(page, templates.Page);
+            Assert.AreEqual(limit, templates.Limit);
+            Assert.AreEqual(1, templates.PageCount);
+
+            Assert.AreEqual(ids[0], templates.Templates[0].Id);
+            Assert.AreEqual(name, templates.Templates[0].Name);
+            Assert.AreEqual(templateContent, templates.Templates[0].Content);
+            Assert.AreEqual(date.ToLocalTime(), templates.Templates[0].LastModified);
         }
     }
 }
