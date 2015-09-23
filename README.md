@@ -76,12 +76,14 @@ Note: replace "replace-with-username", "replace-with-user-api-key", "replace-wit
 ## Requirements
 
 .NET 4.0 or higher
+
 [RestSharp](https://www.nuget.org/packages/RestSharp/) (= 105.1.0)
+
 [Json.NET](https://www.nuget.org/packages/Newtonsoft.Json/) (= 7.0.1)
 
 Please note: in case you have a Newtonsoft.Json library version conflict preventing the library to compile, update this package with the NuGet Package Manager Console:
 
-  Update-Package Newtonsoft.Json
+    $ Update-Package Newtonsoft.Json
 
 ## Contributing
 
