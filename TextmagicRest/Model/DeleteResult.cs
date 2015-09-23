@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TextmagicRest.Model
 {
     /// <summary>
-    /// Delete reponse represenation. Currently has only inherited Status and ClientException fields
+    /// Delete response representation. Currently has only inherited Status and ClientException fields.
     /// </summary>
     public class DeleteResult: BaseModel
     {
