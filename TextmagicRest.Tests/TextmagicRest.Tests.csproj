@@ -71,7 +71,7 @@
     <Compile Include="ContactsTests.cs" />
     <Compile Include="ListsTests.cs" />
     <Compile Include="MessagesTests.cs" />
-    <Compile Include="SendingTests.cs" />
+    <Compile Include="PingTest.cs" />
     <Compile Include="TemplatesTests.cs" />
     <Compile Include="UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

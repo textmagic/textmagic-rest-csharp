@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextmagicRest", "TextmagicR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextmagicRest.Tests", "TextmagicRest.Tests\TextmagicRest.Tests.csproj", "{72F18B6C-B09D-4D98-9633-1AED0DBF5EC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextmagicRest.Examples", "TextmagicRest.Examples\TextmagicRest.Examples.csproj", "{2072E259-422B-4F76-A874-01A50079CF67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{72F18B6C-B09D-4D98-9633-1AED0DBF5EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72F18B6C-B09D-4D98-9633-1AED0DBF5EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72F18B6C-B09D-4D98-9633-1AED0DBF5EC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2072E259-422B-4F76-A874-01A50079CF67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2072E259-422B-4F76-A874-01A50079CF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2072E259-422B-4F76-A874-01A50079CF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2072E259-422B-4F76-A874-01A50079CF67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
