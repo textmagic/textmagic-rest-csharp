@@ -91,22 +91,20 @@ namespace TextmagicRest
         /// <returns></returns>
         public LinkResult CreateList(string name)
         {
-            return CreateList(name, string.Empty, null);
+            return CreateList(name, null);
         }
 
         /// <summary>
         /// Create a new list from the submitted data.
         /// </summary>
         /// <param name="name">List name</param>
-        /// <param name="description">(Optional) List description</param>
         /// <param name="shared">(Optional) Should this list be shared with sub-accounts</param>
         /// <returns></returns>
-        public LinkResult CreateList(string name, string description, bool? shared)
+        public LinkResult CreateList(string name, bool? shared)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "lists";
             request.AddParameter("name", name);
-            request.AddParameter("description", description);
             if (shared.HasValue) request.AddParameter("shared", (bool)shared? "1": "0");
 
             return Execute<LinkResult>(request);
@@ -123,7 +121,6 @@ namespace TextmagicRest
             request.Resource = "lists/{id}";
             request.AddUrlSegment("id", list.Id.ToString());
             request.AddParameter("name", list.Name);
-            request.AddParameter("description", list.Description);
             request.AddParameter("shared", list.Shared? "1" : "0");
 
             return Execute<LinkResult>(request);
@@ -230,7 +227,6 @@ namespace TextmagicRest
             if (contactIds != null && contactIds.Length > 0) request.AddQueryParameter("contacts", string.Join(",", contactIds));
 
             return Execute<DeleteResult>(request);
-
         }
 
         /// <summary>

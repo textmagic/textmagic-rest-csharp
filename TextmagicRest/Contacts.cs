@@ -64,7 +64,7 @@ namespace TextmagicRest
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
-        /// <param name="includeShared">Should shared contacts to be included</param>
+        /// <param name="includeShared">Should shared contacts be included</param>
         /// <returns></returns>
         public ContactsResult GetContacts(int? page, int? limit, bool? includeShared)
         {
@@ -82,7 +82,7 @@ namespace TextmagicRest
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
-        /// <param name="includeShared">Should shared contacts to be included</param>
+        /// <param name="includeShared">Should shared contacts be included</param>
         /// <param name="ids">Find contact by ID(s)</param>
         /// <param name="listId">Find contact by List ID</param>
         /// <param name="query">Find contact by specified search query</param>
@@ -93,6 +93,7 @@ namespace TextmagicRest
             request.Resource = "contacts/search";
             if (page.HasValue) request.AddQueryParameter("page", page.ToString());
             if (limit.HasValue) request.AddQueryParameter("limit", limit.ToString());
+            if (includeShared.HasValue) request.AddQueryParameter("shared", Convert.ToInt32(includeShared).ToString());
             if (ids != null && ids.Length > 0) request.AddQueryParameter("ids", string.Join(",", ids));
             if (listId != null) request.AddQueryParameter("listId", listId.ToString());
             if (query != string.Empty) request.AddQueryParameter("query", query);
@@ -140,7 +141,6 @@ namespace TextmagicRest
         /// <summary>
         /// Update existing contact.
         /// </summary>
-        /// TODO: Remove that unneeded param listIds
         /// <param name="contact">Contact object</param>
         /// <param name="listIds">List IDs</param>
         /// <returns></returns>
@@ -265,11 +265,7 @@ namespace TextmagicRest
         /// <returns></returns>
         public LinkResult UnsubscribeContact(Contact contact)
         {
-            var request = new RestRequest(Method.POST);
-            request.Resource = "unsubscribers";
-            request.AddParameter("phone", contact.Phone);
-
-            return Execute<LinkResult>(request);
+            return UnsubscribeContact(contact.Phone);
         }
 
         /// <summary>
@@ -310,7 +306,7 @@ namespace TextmagicRest
         /// <summary>
         /// Get a single custom field.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Custom field ID</param>
         /// <returns></returns>
         public CustomField GetCustomField(int id)
         {
@@ -332,7 +328,7 @@ namespace TextmagicRest
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "customfields";
-            request.AddParameter("fieldName", name);
+            request.AddParameter("name", name);
 
             return Execute<LinkResult>(request);
         }
@@ -340,14 +336,14 @@ namespace TextmagicRest
         /// <summary>
         /// Update existing custom field.
         /// </summary>
-        /// <param name="customField"></param>
+        /// <param name="customField">CustomField update</param>
         /// <returns></returns>
         public LinkResult UpdateCustomField(CustomField customField)
         {
             var request = new RestRequest(Method.PUT);
             request.Resource = "customfields/{id}";
             request.AddUrlSegment("id", customField.Id.ToString());
-            request.AddParameter("fieldName", customField.Name);
+            request.AddParameter("name", customField.Name);
 
             return Execute<LinkResult>(request);
         }
@@ -377,13 +373,13 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Set contact's custom field value.
+        /// Update/Set contact's custom field value.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="contactId"></param>
-        /// <param name="value"></param>
+        /// <param name="id">Contact's custom field ID</param>
+        /// <param name="contactId">Contact ID</param>
+        /// <param name="value">Contact's custom field value</param>
         /// <returns></returns>
-        public Contact SetCustomFieldValue(int id, int contactId, string value)
+        public virtual LinkResult SetCustomFieldValue(int id, int contactId, string value)
         {
             var request = new RestRequest(Method.PUT);
             request.Resource = "customfields/{id}/update";
@@ -391,7 +387,27 @@ namespace TextmagicRest
             request.AddParameter("contactId", contactId.ToString());
             request.AddParameter("value", value);
 
-            return Execute<Contact>(request);
+            return Execute<LinkResult>(request);
+        }
+
+        /// <summary>
+        /// Get lists which contact belongs to.
+        /// </summary>
+        /// <param name="id">Contact ID</param>
+        /// <param name="page">Fetch specified results page</param>
+        /// <param name="limit">How many results to return</param>
+        /// <returns></returns>
+        public ContactListsResult GetListsWhichContactBelongsTo(int id, int? page, int? limit)
+        {
+            Require.Argument("id", id);
+
+            var request = new RestRequest();
+            request.Resource = "contacts/{id}/lists";
+            request.AddUrlSegment("id", id.ToString());
+            if (page.HasValue) request.AddQueryParameter("page", page.ToString());
+            if (limit.HasValue) request.AddQueryParameter("limit", limit.ToString());
+
+            return Execute<ContactListsResult>(request);
         }
     }
 }

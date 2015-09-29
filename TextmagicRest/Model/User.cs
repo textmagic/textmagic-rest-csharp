@@ -1,7 +1,21 @@
 ﻿using System;
+using RestSharp.Deserializers;
 
 namespace TextmagicRest.Model
 {
+    public enum AccountStatus
+    {
+        Active = 'A',
+        Trial = 'T'
+    }
+
+    public enum SubAccountType
+    {
+        ParentUser = 'P',
+        AdministratorSubAccount = 'A',
+        RegularUser = 'U'
+    }
+
     /// <summary>
     /// User account representation class
     /// </summary>
@@ -32,10 +46,27 @@ namespace TextmagicRest.Model
         /// </summary>
         public virtual string Name { get { return FirstName + " " + LastName; } }
 
+        [DeserializeAs(Name = "status")]
+        public char StatusChar { get; set; }
+        /// <summary>
+        /// Current Account Status
+        /// </summary>
+        [DeserializeAs(Name = "fake-unused-name")]
+        public AccountStatus Status
+        {
+            get { return (AccountStatus)StatusChar; }
+            set { StatusChar = value.ToString()[0]; }
+        }
+
         /// <summary>
         /// Account balance, in account currency
         /// </summary>
         public double Balance { get; set; }
+
+        /// <summary>
+        /// Account Company
+        /// </summary>
+        public string Company { get; set; }
 
         /// <summary>
         /// Account currency
@@ -46,5 +77,18 @@ namespace TextmagicRest.Model
         /// Account timezone
         /// </summary>
         public Timezone Timezone { get; set; }
+
+        [DeserializeAs(Name = "subaccountType")]
+        public char AccountChar { get; set; }
+        /// <summary>
+        /// Type of Account
+        /// </summary>
+        [DeserializeAs(Name = "fake-unused-name")]
+        public SubAccountType SubaccountType
+        {
+            get { return (SubAccountType)AccountChar; }
+            set { AccountChar = value.ToString()[0]; }
+        }
+
     }
 }

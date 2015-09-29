@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 namespace TextmagicRest.Model
 {
     /// <summary>
-    /// Delete response representation. Currently has only inherited Status and ClientException fields.
+    /// PingResult class
     /// </summary>
-    public class DeleteResult: BaseModel
+    public class PingResult : BaseModel
     {
-        
+        /// <summary>
+        /// Ping Result
+        /// </summary>
+        public string Ping { get; set; }
     }
 }

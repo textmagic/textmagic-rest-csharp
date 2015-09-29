@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RestSharp.Deserializers;
 
 namespace TextmagicRest.Model
 {
     /// <summary>
-    /// Delete response representation. Currently has only inherited Status and ClientException fields.
+    /// List of Subaccounts
     /// </summary>
-    public class DeleteResult: BaseModel
+    public class UserResults: BaseModelList
     {
-        
+        [DeserializeAs(Name = "resources")]
+        public List<User> Subaccounts { get; set; }
     }
 }

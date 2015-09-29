@@ -15,9 +15,9 @@ namespace TextmagicRest
     public partial class Client
     {
         /// <summary>
-        /// 
+        /// Get a single outgoing message.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Message ID</param>
         /// <returns></returns>
         public Message GetMessage(int id)
         {
@@ -31,7 +31,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user oubound messages.
+        /// Get all user outbound messages.
         /// </summary>
         /// <returns></returns>
         public MessagesResult GetMessages()
@@ -40,7 +40,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user oubound messages.
+        /// Get all user outbound messages.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -50,7 +50,7 @@ namespace TextmagicRest
         }
         
         /// <summary>
-        /// Get all user oubound messages.
+        /// Get all user outbound messages.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -66,7 +66,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Find oubound messages by given parameters.
+        /// Find outbound messages by given parameters.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -90,7 +90,7 @@ namespace TextmagicRest
         /// <summary>
         /// Delete a single message.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Message ID</param>
         /// <returns></returns>
         public DeleteResult DeleteMessage(int id)
         {
@@ -184,7 +184,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get bulk message sending session status.
+        /// Get bulk message session status.
         /// </summary>
         /// <param name="id">Bulk session ID</param>
         /// <returns></returns>
@@ -333,9 +333,9 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get a single inbound message.
+        /// Get a single inbox message.
         /// </summary>
-        /// <param name="id">Inbound message ID</param>
+        /// <param name="id">Inbox message ID</param>
         /// <returns></returns>
         public Reply GetReply(int id)
         {
@@ -349,7 +349,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all inbound messages.
+        /// Get all inbox messages.
         /// </summary>
         /// <returns></returns>
         public RepliesResult GetReplies()
@@ -358,7 +358,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all inbound messages.
+        /// Get all inbox messages.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -368,7 +368,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all inbound messages.
+        /// Get all inbox messages.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -428,7 +428,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Check pricing for outbound message(s).
+        /// Check pricing for a new outbound message.
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
@@ -588,7 +588,5 @@ namespace TextmagicRest
 
             return Execute<SessionsResult>(request);
         }
-
-        
     }
 }
