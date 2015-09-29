@@ -621,66 +621,7 @@ namespace TextmagicRest.Tests
             Assert.AreEqual("NameOfSenderId", resultSenderIds.SenderIds[0].Name);
             Assert.AreEqual(SenderIdStatus.Active, resultSenderIds.SenderIds[0].Status);
             Assert.AreEqual(null, resultSenderIds.SenderIds[0].User);
-        }
-
-        [Test]
-        public void ShouldAuthenticateUser()
-        {
-            IRestRequest savedRequest = null;
-            mockClient.Setup(trc => trc.Execute<TokenResult>(It.IsAny<IRestRequest>()))
-                .Callback<IRestRequest>((request) => savedRequest = request)
-                .Returns(new TokenResult());
-            var client = mockClient.Object;
-
-            string username = "testuser";
-            string password = "testpassword";
-            client.AuthenticateUser(username, password);
-
-            mockClient.Verify(trc => trc.Execute<TokenResult>(It.IsAny<IRestRequest>()), Times.Once);
-            Assert.IsNotNull(savedRequest);
-            Assert.AreEqual("tokens", savedRequest.Resource);
-            Assert.AreEqual(Method.POST, savedRequest.Method);
-            Assert.AreEqual(2, savedRequest.Parameters.Count);
-
-            var content = "{ \"username\": \"testuser\", \"token\": \"testpassword\", \"expires\": \"2015-09-22T19:28:30+0000\" }";
-
-            var testClient = Common.CreateClient<TokenResult>(content, null, null);
-            client = new Client(testClient);
-
-            var tokenResult = client.AuthenticateUser(username, password);
-
-            Assert.IsTrue(tokenResult.Success);
-            Assert.AreEqual(username, tokenResult.Username);
-            Assert.AreEqual(password, tokenResult.Token);
-            Assert.IsNotNull(tokenResult.Expires);
-        }
-
-        [Test]
-        public void ShouldRefreshToken()
-        {
-            IRestRequest savedRequest = null;
-            mockClient.Setup(trc => trc.Execute<LinkResult>(It.IsAny<IRestRequest>()))
-                .Callback<IRestRequest>((request) => savedRequest = request)
-                .Returns(new LinkResult());
-            var client = mockClient.Object;
-
-            client.RefreshToken();
-
-            mockClient.Verify(trc => trc.Execute<LinkResult>(It.IsAny<IRestRequest>()), Times.Once);
-            Assert.IsNotNull(savedRequest);
-            Assert.AreEqual("tokens/refresh", savedRequest.Resource);
-            Assert.AreEqual(Method.GET, savedRequest.Method);
-            Assert.AreEqual(0, savedRequest.Parameters.Count);
-
-            var content = "{ \"username\": \"testuser\", \"token\": \"testpassword\", \"expires\": \"2015-09-22T19:28:30+0000\" }";
-
-            var testClient = Common.CreateClient<LinkResult>(content, null, null);
-            client = new Client(testClient);
-
-            var refreshResult = client.RefreshToken();
-
-            Assert.IsTrue(refreshResult.Success);
-        }
+        }        
 
         [Test]
         public void ShouldGetSingleSubaccount()

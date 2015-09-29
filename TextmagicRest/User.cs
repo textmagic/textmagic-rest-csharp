@@ -358,37 +358,7 @@ namespace TextmagicRest
             request.AddQueryParameter("end", DateTimeToTimestamp(end).ToString());
 
             return Execute<SpendingStatsResult>(request);
-        }
-
-        /// <summary>
-        /// Authenticate user by given username and password.
-        /// </summary>
-        /// <param name="username">Account username or email</param>
-        /// <param name="password">Account password</param>
-        /// <returns></returns>
-        public TokenResult AuthenticateUser(string username, string password)
-        {
-            var request = new RestRequest();
-            request.Resource = "tokens";
-            request.Method = Method.POST;
-
-            request.AddQueryParameter("username", username);
-            request.AddQueryParameter("password", password);
-
-            return Execute<TokenResult>(request);
-        }
-
-        /// <summary>
-        /// Refresh access token.
-        /// </summary>
-        /// <returns></returns>
-        public LinkResult RefreshToken()
-        {
-            var request = new RestRequest();
-            request.Resource = "tokens/refresh";
-
-            return Execute<LinkResult>(request);
-        }
+        }       
 
         /// <summary>
         /// Get a single subaccount.
