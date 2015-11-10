@@ -354,7 +354,7 @@ namespace TextmagicRest
         /// <returns></returns>
         public RepliesResult GetReplies()
         {
-            return GetReplies();
+            return GetReplies(null, null);
         }
 
         /// <summary>
