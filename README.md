@@ -6,7 +6,7 @@ In this directory, you'll find the files you need to be able to create the libra
 
 ## What is TextMagic?
 
-TextMagic's application programming interface (API) provides the communication link between your application and TextMagic’s SMS Gateway, allowing you to send and receive text messages and to check the delivery status of text messages you’ve already sent.
+TextMagic's application programming interface (API) provides the communication link between your application and TextMagicâ€™s SMS Gateway, allowing you to send and receive text messages and to check the delivery status of text messages youâ€™ve already sent.
 
 https://www.textmagic.com/docs/api/
 
@@ -77,7 +77,7 @@ Note: replace "replace-with-username", "replace-with-user-api-key", "replace-wit
 
 .NET 4.0 or higher
 
-[RestSharp](https://www.nuget.org/packages/RestSharp/) (>= 105.1.0)
+[RestSharp](https://www.nuget.org/packages/RestSharp/) (= 105.1.0)
 
 ## Contributing
 
