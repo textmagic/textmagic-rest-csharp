@@ -191,7 +191,7 @@ namespace TextmagicRest
             var request = new RestRequest(Method.PUT);
             request.Resource = "lists/{id}/contacts";
             request.AddUrlSegment("id", id.ToString());
-            if (contactIds != null && contactIds.Length > 0) request.AddQueryParameter("contacts", string.Join(",", contactIds));
+            if (contactIds != null && contactIds.Length > 0) request.AddParameter("contacts", string.Join(",", contactIds));
 
             return Execute<LinkResult>(request);
         }
@@ -224,7 +224,7 @@ namespace TextmagicRest
             var request = new RestRequest(Method.DELETE);
             request.Resource = "lists/{id}/contacts";
             request.AddUrlSegment("id", id.ToString());
-            if (contactIds != null && contactIds.Length > 0) request.AddQueryParameter("contacts", string.Join(",", contactIds));
+            if (contactIds != null && contactIds.Length > 0) request.AddParameter("contacts", string.Join(",", contactIds));
 
             return Execute<DeleteResult>(request);
         }
