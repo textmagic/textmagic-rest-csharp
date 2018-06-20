@@ -131,7 +131,7 @@ namespace TextmagicRest.Tests
             Assert.AreEqual(3, savedRequest.Parameters.Count);
             Assert.AreEqual(templateId.ToString(), savedRequest.Parameters.Find(x => x.Name == "id").Value);
             Assert.AreEqual(templateName, savedRequest.Parameters.Find(x => x.Name == "name").Value);
-            Assert.AreEqual(templateContent, savedRequest.Parameters.Find(x => x.Name == "body").Value);
+            Assert.AreEqual(templateContent, savedRequest.Parameters.Find(x => x.Name == "content").Value);
 
             var content = "{ \"id\": \"31337\", \"href\": \"/api/v2/contacts/31337\"}";
 
@@ -162,7 +162,7 @@ namespace TextmagicRest.Tests
             Assert.AreEqual(Method.POST, savedRequest.Method);
             Assert.AreEqual(2, savedRequest.Parameters.Count);
             Assert.AreEqual(templateName, savedRequest.Parameters.Find(x => x.Name == "name").Value);
-            Assert.AreEqual(templateContent, savedRequest.Parameters.Find(x => x.Name == "body").Value);
+            Assert.AreEqual(templateContent, savedRequest.Parameters.Find(x => x.Name == "content").Value);
             
             var content = "{ \"id\": \"31337\", \"href\": \"/api/v2/contacts/31337\"}";
 

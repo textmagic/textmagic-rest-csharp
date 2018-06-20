@@ -121,7 +121,7 @@ namespace TextmagicRest
             var request = new RestRequest(Method.POST);
             request.Resource = "templates";
             request.AddParameter("name", name);
-            request.AddParameter("body", content);
+            request.AddParameter("content", content);
 
             return Execute<LinkResult>(request);
         }
@@ -137,7 +137,7 @@ namespace TextmagicRest
             request.Resource = "templates/{id}";
             request.AddUrlSegment("id", template.Id.ToString());
             request.AddParameter("name", template.Name);
-            request.AddParameter("body", template.Content);
+            request.AddParameter("content", template.Content);
 
             return Execute<LinkResult>(request);
         }
