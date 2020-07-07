@@ -1,19 +1,17 @@
-﻿using System;
-
-namespace TextmagicRest.Model
+﻿namespace TextmagicRest.Model
 {
     /// <summary>
-    /// Country representation class
+    ///     Country representation class
     /// </summary>
     public class Country
     {
         /// <summary>
-        /// 2-letter ISO country ID
+        ///     2-letter ISO country ID
         /// </summary>
         public string Id { get; set; }
 
         /// <summary>
-        /// Country name
+        ///     Country name
         /// </summary>
         public string Name { get; set; }
     }

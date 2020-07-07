@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Deserializers;
-using TextmagicRest.Model;
 using RestSharp.Validation;
-using System.Text.RegularExpressions;
+using TextmagicRest.Model;
 
 namespace TextmagicRest
 {
     public partial class Client
     {
         /// <summary>
-        /// Get a single outgoing message.
+        ///     Get a single outgoing message.
         /// </summary>
         /// <param name="id">Message ID</param>
         /// <returns></returns>
@@ -31,7 +24,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user outbound messages.
+        ///     Get all user outbound messages.
         /// </summary>
         /// <returns></returns>
         public MessagesResult GetMessages()
@@ -40,7 +33,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user outbound messages.
+        ///     Get all user outbound messages.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -48,9 +41,9 @@ namespace TextmagicRest
         {
             return GetMessages(page, null);
         }
-        
+
         /// <summary>
-        /// Get all user outbound messages.
+        ///     Get all user outbound messages.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -66,7 +59,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Find outbound messages by given parameters.
+        ///     Find outbound messages by given parameters.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -88,7 +81,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a single message.
+        ///     Delete a single message.
         /// </summary>
         /// <param name="id">Message ID</param>
         /// <returns></returns>
@@ -102,7 +95,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a single message.
+        ///     Delete a single message.
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -112,7 +105,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Send a new outbound message.
+        ///     Send a new outbound message.
         /// </summary>
         /// <param name="options">Message sending options</param>
         /// <returns></returns>
@@ -122,10 +115,10 @@ namespace TextmagicRest
             request = _makeSendingRequest(request, options);
 
             return Execute<SendingResult>(request);
-        }        
+        }
 
         /// <summary>
-        /// Convert SendingOptions to RestRequest parameters
+        ///     Convert SendingOptions to RestRequest parameters
         /// </summary>
         /// <param name="request"></param>
         /// <param name="options"></param>
@@ -134,22 +127,26 @@ namespace TextmagicRest
         {
             request.Resource = "messages";
             if (!string.IsNullOrEmpty(options.Text)) request.AddParameter("text", options.Text);
-            if (options.Phones != null && options.Phones.Length > 0) request.AddParameter("phones", string.Join(",", options.Phones));
-            if (options.ContactIds != null && options.ContactIds.Length > 0) request.AddParameter("contacts", string.Join(",", options.ContactIds));
-            if (options.ListIds != null && options.ListIds.Length > 0) request.AddParameter("lists", string.Join(",", options.ListIds));
-            if (options.CutExtra.HasValue) request.AddParameter("cutExtra", (bool)options.CutExtra ? "1" : "0");
+            if (options.Phones != null && options.Phones.Length > 0)
+                request.AddParameter("phones", string.Join(",", options.Phones));
+            if (options.ContactIds != null && options.ContactIds.Length > 0)
+                request.AddParameter("contacts", string.Join(",", options.ContactIds));
+            if (options.ListIds != null && options.ListIds.Length > 0)
+                request.AddParameter("lists", string.Join(",", options.ListIds));
+            if (options.CutExtra.HasValue) request.AddParameter("cutExtra", (bool) options.CutExtra ? "1" : "0");
             if (options.PartsCount.HasValue) request.AddParameter("partsCount", options.PartsCount.ToString());
             if (!string.IsNullOrEmpty(options.ReferenceId)) request.AddParameter("referenceId", options.ReferenceId);
             if (!string.IsNullOrEmpty(options.From)) request.AddParameter("from", options.From);
             if (!string.IsNullOrEmpty(options.Rrule)) request.AddParameter("rrule", options.Rrule);
-            if (options.SendingTime.HasValue) request.AddParameter("sendingTime", DateTimeToTimestamp((DateTime)options.SendingTime).ToString());
+            if (options.SendingTime.HasValue)
+                request.AddParameter("sendingTime", DateTimeToTimestamp((DateTime) options.SendingTime).ToString());
             if (options.TemplateId.HasValue) request.AddParameter("templateId", options.TemplateId.ToString());
 
             return request;
         }
 
         /// <summary>
-        /// Send a new outbound message.
+        ///     Send a new outbound message.
         /// </summary>
         /// <param name="text">Message text</param>
         /// <param name="phones">Array of phone number in international E.164 format message will be sent to</param>
@@ -166,14 +163,14 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Send a new outbound message.
+        ///     Send a new outbound message.
         /// </summary>
         /// <param name="text">Message text</param>
         /// <param name="phone">Destination phone number in international E.164 format</param>
         /// <returns></returns>
         public SendingResult SendMessage(string text, string phone)
         {
-            string[] phones = { phone };
+            string[] phones = {phone};
             var options = new SendingOptions
             {
                 Text = text,
@@ -184,7 +181,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get bulk message session status.
+        ///     Get bulk message session status.
         /// </summary>
         /// <param name="id">Bulk session ID</param>
         /// <returns></returns>
@@ -200,7 +197,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get a message session.
+        ///     Get a message session.
         /// </summary>
         /// <param name="id">Session ID</param>
         /// <returns></returns>
@@ -216,7 +213,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Fetch messages by given session id.
+        ///     Fetch messages by given session id.
         /// </summary>
         /// <param name="id">Session ID</param>
         /// <returns></returns>
@@ -234,7 +231,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a message session, together with all nested messages.
+        ///     Delete a message session, together with all nested messages.
         /// </summary>
         /// <param name="id">Session ID</param>
         /// <returns></returns>
@@ -248,7 +245,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a message session, together with all nested messages.
+        ///     Delete a message session, together with all nested messages.
         /// </summary>
         /// <param name="session">Session object</param>
         /// <returns></returns>
@@ -258,7 +255,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get message schedule.
+        ///     Get message schedule.
         /// </summary>
         /// <param name="id">Schedule ID</param>
         /// <returns></returns>
@@ -274,7 +271,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all scheduled messages.
+        ///     Get all scheduled messages.
         /// </summary>
         /// <returns></returns>
         public SchedulesResult GetSchedules()
@@ -283,7 +280,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all scheduled messages.
+        ///     Get all scheduled messages.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -293,7 +290,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all scheduled messages.
+        ///     Get all scheduled messages.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -309,7 +306,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a message session, together with all nested messages.
+        ///     Delete a message session, together with all nested messages.
         /// </summary>
         /// <param name="id">Schedule ID</param>
         /// <returns></returns>
@@ -323,7 +320,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a message session, together with all nested messages.
+        ///     Delete a message session, together with all nested messages.
         /// </summary>
         /// <param name="schedule"></param>
         /// <returns></returns>
@@ -333,7 +330,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get a single inbox message.
+        ///     Get a single inbox message.
         /// </summary>
         /// <param name="id">Inbox message ID</param>
         /// <returns></returns>
@@ -349,7 +346,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all inbox messages.
+        ///     Get all inbox messages.
         /// </summary>
         /// <returns></returns>
         public RepliesResult GetReplies()
@@ -358,7 +355,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all inbox messages.
+        ///     Get all inbox messages.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -368,7 +365,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all inbox messages.
+        ///     Get all inbox messages.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -384,7 +381,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete the incoming message.
+        ///     Delete the incoming message.
         /// </summary>
         /// <param name="id">Inbound message ID</param>
         /// <returns></returns>
@@ -398,7 +395,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete the incoming message.
+        ///     Delete the incoming message.
         /// </summary>
         /// <param name="reply">Reply object</param>
         /// <returns></returns>
@@ -408,7 +405,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Find inbound messages by given parameters.
+        ///     Find inbound messages by given parameters.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -428,7 +425,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Check pricing for a new outbound message.
+        ///     Check pricing for a new outbound message.
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
@@ -444,7 +441,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user chats.
+        ///     Get all user chats.
         /// </summary>
         /// <returns></returns>
         public ChatsResult GetChats()
@@ -453,7 +450,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user chats.
+        ///     Get all user chats.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -463,7 +460,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user chats.
+        ///     Get all user chats.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -479,7 +476,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Fetch messages from chat with specified phone number.
+        ///     Fetch messages from chat with specified phone number.
         /// </summary>
         /// <param name="phone">Phone number</param>
         /// <returns></returns>
@@ -489,7 +486,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Fetch messages from chat with specified phone number.
+        ///     Fetch messages from chat with specified phone number.
         /// </summary>
         /// <param name="phone">Phone number</param>
         /// <param name="page">Fetch specified results page</param>
@@ -500,7 +497,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Fetch messages from chat with specified phone number.
+        ///     Fetch messages from chat with specified phone number.
         /// </summary>
         /// <param name="phone">Phone number</param>
         /// <param name="page">Fetch specified results page</param>
@@ -518,7 +515,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all bulk sending sessions.
+        ///     Get all bulk sending sessions.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -528,7 +525,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all bulk sending sessions.
+        ///     Get all bulk sending sessions.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -538,7 +535,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all bulk sending sessions.
+        ///     Get all bulk sending sessions.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -554,7 +551,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all sending sessions.
+        ///     Get all sending sessions.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -564,7 +561,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all sending sessions.
+        ///     Get all sending sessions.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -574,7 +571,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all sending sessions.
+        ///     Get all sending sessions.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>

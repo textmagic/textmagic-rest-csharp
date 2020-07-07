@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using RestSharp.Deserializers;
 
 namespace TextmagicRest.Model
 {
     /// <summary>
-    /// List of Schedule resources
+    ///     List of Schedule resources
     /// </summary>
     public class SchedulesResult : BaseModelList
     {
-        [DeserializeAs(Name = "resources")]
-        public List<Schedule> Schedules { get; set; }
+        [DeserializeAs(Name = "resources")] public List<Schedule> Schedules { get; set; }
     }
 }

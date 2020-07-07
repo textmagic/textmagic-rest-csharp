@@ -1,33 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TextmagicRest.Model
 {
     /// <summary>
-    /// Available source sender IDs list
+    ///     Available source sender IDs list
     /// </summary>
     public class SourcesResult
     {
         /// <summary>
-        /// Dedicated numbers list
+        ///     Dedicated numbers list
         /// </summary>
         public List<string> Dedicated { get; set; }
 
         /// <summary>
-        /// Shared numbers list
+        ///     Shared numbers list
         /// </summary>
         public List<string> Shared { get; set; }
 
         /// <summary>
-        /// Alphanumeric Sender IDs
+        ///     Alphanumeric Sender IDs
         /// </summary>
         public List<string> SenderId { get; set; }
 
         /// <summary>
-        /// Approved user phone numbers
+        ///     Approved user phone numbers
         /// </summary>
         public List<string> User { get; set; }
     }

@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TextmagicRest.Model
+﻿namespace TextmagicRest.Model
 {
     /// <summary>
-    /// Token class
+    ///     Token class
     /// </summary>
     public class TokenResult : BaseModel
     {
         /// <summary>
-        /// Username
+        ///     Username
         /// </summary>
         public string Username { get; set; }
 
         /// <summary>
-        /// Token
+        ///     Token
         /// </summary>
         public string Token { get; set; }
 
         /// <summary>
-        /// Expiration Date
+        ///     Expiration Date
         /// </summary>
         public string Expires { get; set; }
     }

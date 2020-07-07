@@ -3,27 +3,27 @@
 namespace TextmagicRest.Model
 {
     /// <summary>
-    /// Message template class
+    ///     Message template class
     /// </summary>
-    public class Template: BaseModel
+    public class Template : BaseModel
     {
         /// <summary>
-        /// Template ID
+        ///     Template ID
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Template name
+        ///     Template name
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Template content
+        ///     Template content
         /// </summary>
         public string Content { get; set; }
 
         /// <summary>
-        /// Last modification date
+        ///     Last modification date
         /// </summary>
         public DateTime? LastModified { get; set; }
     }

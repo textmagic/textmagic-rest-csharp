@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Deserializers;
-using TextmagicRest.Model;
 using RestSharp.Validation;
+using TextmagicRest.Model;
 
 namespace TextmagicRest
 {
     public partial class Client
     {
         /// <summary>
-        /// Get all available sender settings which could be used in "from" parameter of POST messages method.
+        ///     Get all available sender settings which could be used in "from" parameter of POST messages method.
         /// </summary>
         /// <returns></returns>
         public SourcesResult GetAvailableSendingSources()
@@ -23,7 +17,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all available sender settings which could be used in "from" parameter of POST messages method.
+        ///     Get all available sender settings which could be used in "from" parameter of POST messages method.
         /// </summary>
         /// <param name="country">2-letter ISO Country ID</param>
         /// <returns></returns>
@@ -31,13 +25,13 @@ namespace TextmagicRest
         {
             var request = new RestRequest();
             request.Resource = "sources";
-            if (!String.IsNullOrEmpty(country)) request.AddQueryParameter("country", country);
+            if (!string.IsNullOrEmpty(country)) request.AddQueryParameter("country", country);
 
             return Execute<SourcesResult>(request);
         }
 
         /// <summary>
-        /// Get all Sender IDs.
+        ///     Get all Sender IDs.
         /// </summary>
         /// <returns></returns>
         public SenderIdsResult GetSenderIds()
@@ -46,7 +40,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all Sender IDs.
+        ///     Get all Sender IDs.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -56,7 +50,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all Sender IDs.
+        ///     Get all Sender IDs.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -72,7 +66,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get a single Sender ID.
+        ///     Get a single Sender ID.
         /// </summary>
         /// <param name="id">Sender ID numeric ID</param>
         /// <returns></returns>
@@ -88,7 +82,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a single Sender ID.
+        ///     Delete a single Sender ID.
         /// </summary>
         /// <param name="id">Sender ID numeric ID</param>
         /// <returns></returns>
@@ -102,7 +96,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a single Sender ID.
+        ///     Delete a single Sender ID.
         /// </summary>
         /// <param name="senderId">SenderID object</param>
         /// <returns></returns>
@@ -112,7 +106,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Apply for a new Sender ID.
+        ///     Apply for a new Sender ID.
         /// </summary>
         /// <param name="senderId">Alphanumeric Sender ID (maximum 11 characters)</param>
         /// <param name="explanation">Explain why do you need this Sender ID</param>
@@ -128,7 +122,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Find available dedicated numbers to buy.
+        ///     Find available dedicated numbers to buy.
         /// </summary>
         /// <param name="country">Dedicated number country</param>
         /// <param name="prefix">Desired number prefix. Should include country code (i.e. 447 for GB)</param>
@@ -145,7 +139,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get a single dedicated number.
+        ///     Get a single dedicated number.
         /// </summary>
         /// <param name="id">Dedicated number ID</param>
         /// <returns></returns>
@@ -161,7 +155,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all dedicated numbers.
+        ///     Get all dedicated numbers.
         /// </summary>
         /// <returns></returns>
         public DedicatedNumbersResult GetDedicatedNumbers()
@@ -170,7 +164,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all dedicated numbers.
+        ///     Get all dedicated numbers.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -180,7 +174,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all dedicated numbers.
+        ///     Get all dedicated numbers.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -196,7 +190,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Cancel dedicated number subscription.
+        ///     Cancel dedicated number subscription.
         /// </summary>
         /// <param name="id">Dedicated number ID</param>
         /// <returns></returns>
@@ -210,7 +204,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Cancel dedicated number subscription.
+        ///     Cancel dedicated number subscription.
         /// </summary>
         /// <param name="senderId">DedicatedNumber object</param>
         /// <returns></returns>
@@ -220,7 +214,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Buy a dedicated number and assign it to the specified account.
+        ///     Buy a dedicated number and assign it to the specified account.
         /// </summary>
         /// <param name="phone">Desired dedicated phone number in international E.164 format</param>
         /// <param name="country">Dedicated number country</param>
@@ -238,7 +232,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get current user info.
+        ///     Get current user info.
         /// </summary>
         /// <returns></returns>
         public User GetUser()
@@ -250,7 +244,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Update current user info.
+        ///     Update current user info.
         /// </summary>
         /// <param name="firstName">Account first name</param>
         /// <param name="lastName">Account last name</param>
@@ -272,7 +266,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all account invoices.
+        ///     Get all account invoices.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -282,7 +276,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all account invoices.
+        ///     Get all account invoices.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -292,7 +286,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all account invoices.
+        ///     Get all account invoices.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -308,7 +302,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Return messaging statistics.
+        ///     Return messaging statistics.
         /// </summary>
         /// <param name="groupBy">Group results by specified period: day, month, year or none. Default is none</param>
         /// <param name="start">(Optional) Start date in unix timestamp format. Default is 7 days ago</param>
@@ -319,7 +313,7 @@ namespace TextmagicRest
             var request = new RestRequest();
             request.Resource = "stats/messaging";
 
-            string groupByString = "off";
+            var groupByString = "off";
             switch (groupBy)
             {
                 case MessagingStatsGroupBy.Day:
@@ -332,6 +326,7 @@ namespace TextmagicRest
                     groupByString = "year";
                     break;
             }
+
             request.AddQueryParameter("by", groupByString);
             request.AddQueryParameter("start", DateTimeToTimestamp(start).ToString());
             request.AddQueryParameter("end", DateTimeToTimestamp(start).ToString());
@@ -340,7 +335,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Return account spending statistics.
+        ///     Return account spending statistics.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -358,10 +353,10 @@ namespace TextmagicRest
             request.AddQueryParameter("end", DateTimeToTimestamp(end).ToString());
 
             return Execute<SpendingStatsResult>(request);
-        }       
+        }
 
         /// <summary>
-        /// Get a single subaccount.
+        ///     Get a single subaccount.
         /// </summary>
         /// <param name="id">SubAccount Id</param>
         /// <returns></returns>
@@ -377,7 +372,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Close subaccount.
+        ///     Close subaccount.
         /// </summary>
         /// <param name="id">SubAccount Id</param>
         /// <returns></returns>
@@ -394,7 +389,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all subaccounts.
+        ///     Get all subaccounts.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -411,7 +406,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Invite new Subaccount.
+        ///     Invite new Subaccount.
         /// </summary>
         /// <param name="email">Subaccount email</param>
         /// <param name="role">Subaccount role: administrator (A) or regular user (U)</param>

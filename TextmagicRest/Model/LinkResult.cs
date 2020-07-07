@@ -1,11 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
 
 namespace TextmagicRest.Model
 {
     /// <summary>
-    /// Resource class
+    ///     Resource class
     /// </summary>
     public enum ResourceClass
     {
@@ -18,62 +17,60 @@ namespace TextmagicRest.Model
         Contact,
         ContactList,
         CustomField
-    };      
+    }
 
-    public class LinkResult: BaseModel
+    public class LinkResult : BaseModel
     {
         private string href;
+
         /// <summary>
-        /// Link to a newly created/updated resource
+        ///     Link to a newly created/updated resource
         /// </summary>
-        public string Href 
+        public string Href
         {
-            get { return href; }
-            set 
+            get => href;
+            set
             {
                 href = value;
 
                 // Get linked resource class by returned href
-                Dictionary<string, ResourceClass> relations = new Dictionary<string, ResourceClass>() 
+                var relations = new Dictionary<string, ResourceClass>
                 {
-                    { "messages", ResourceClass.Message },
-                    { "bulks", ResourceClass.BulkSession },
-                    { "sessions", ResourceClass.Session },
-                    { "schedules", ResourceClass.Schedule },
-                    { "templates", ResourceClass.Template },
-                    { "contacts", ResourceClass.Contact },
-                    { "lists", ResourceClass.ContactList },
-                    { "customfields", ResourceClass.CustomField }
+                    {"messages", ResourceClass.Message},
+                    {"bulks", ResourceClass.BulkSession},
+                    {"sessions", ResourceClass.Session},
+                    {"schedules", ResourceClass.Schedule},
+                    {"templates", ResourceClass.Template},
+                    {"contacts", ResourceClass.Contact},
+                    {"lists", ResourceClass.ContactList},
+                    {"customfields", ResourceClass.CustomField}
                 };
 
-                Regex r = new Regex(@"(\w+)/(\d+)", RegexOptions.IgnoreCase);
-                Match m = r.Match(value);
+                var r = new Regex(@"(\w+)/(\d+)", RegexOptions.IgnoreCase);
+                var m = r.Match(value);
                 if (!m.Success)
                 {
                     ResourceClass = ResourceClass.Unknown;
                 }
                 else
                 {
-                    string key = m.Groups[1].Value;
-                    ResourceClass resourceClass = ResourceClass.Unknown;
+                    var key = m.Groups[1].Value;
+                    var resourceClass = ResourceClass.Unknown;
 
-                    if (relations.ContainsKey(key))
-                    {
-                        relations.TryGetValue(key, out resourceClass);
-                    }
+                    if (relations.ContainsKey(key)) relations.TryGetValue(key, out resourceClass);
 
                     ResourceClass = resourceClass;
                 }
-            } 
+            }
         }
 
         /// <summary>
-        /// Created or updated resource ID
+        ///     Created or updated resource ID
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Resource class
+        ///     Resource class
         /// </summary>
         public ResourceClass ResourceClass { get; set; }
     }

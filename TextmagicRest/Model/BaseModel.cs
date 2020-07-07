@@ -1,20 +1,18 @@
-﻿using System;
-
-namespace TextmagicRest.Model
+﻿namespace TextmagicRest.Model
 {
     /// <summary>
-    /// Base class for TextMagic REST API resources
+    ///     Base class for TextMagic REST API resources
     /// </summary>
     public abstract class BaseModel
     {
         /// <summary>
-        /// API exception thrown (if any)
+        ///     API exception thrown (if any)
         /// </summary>
         public ClientException ClientException { get; set; }
 
         /// <summary>
-        /// Is request successful
+        ///     Is request successful
         /// </summary>
-        public bool Success { get { return ClientException == null; } }
+        public bool Success => ClientException == null;
     }
 }
