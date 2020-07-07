@@ -1,38 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TextmagicRest.Model
+﻿namespace TextmagicRest.Model
 {
     /// <summary>
-    /// TextMagic Invoice class
+    ///     TextMagic Invoice class
     /// </summary>
     public class Invoice : BaseModel
     {
         /// <summary>
-        /// Invoice ID
+        ///     Invoice ID
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Invoice bundle
+        ///     Invoice bundle
         /// </summary>
         public int Bundle { get; set; }
 
         /// <summary>
-        /// Invoice currency
+        ///     Invoice currency
         /// </summary>
         public string Currency { get; set; }
 
         /// <summary>
-        /// Invoice VAT amount
+        ///     Invoice VAT amount
         /// </summary>
         public double Vat { get; set; }
 
         /// <summary>
-        /// Payment method description
+        ///     Payment method description
         /// </summary>
         public string PaymentMethod { get; set; }
     }

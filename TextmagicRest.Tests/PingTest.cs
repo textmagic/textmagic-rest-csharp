@@ -1,18 +1,13 @@
-﻿using System;
-using TextmagicRest.Model;
-using Moq;
+﻿using Moq;
 using NUnit.Framework;
 using RestSharp;
-using System.Text;
-using RestSharp.Deserializers;
+using TextmagicRest.Model;
 
 namespace TextmagicRest.Tests
 {
     [TestFixture]
     public class PingTest
     {
-        private Mock<Client> mockClient;
-
         [SetUp]
         public void Setup()
         {
@@ -20,18 +15,20 @@ namespace TextmagicRest.Tests
             mockClient.CallBase = true;
         }
 
+        private Mock<Client> mockClient;
+
         [Test]
         public void ShouldPing()
         {
             IRestRequest savedRequest = null;
             mockClient.Setup(trc => trc.Execute<PingResult>(It.IsAny<IRestRequest>()))
-                .Callback<IRestRequest>((request) => savedRequest = request)
+                .Callback<IRestRequest>(request => savedRequest = request)
                 .Returns(new PingResult());
             var client = mockClient.Object;
 
             client.Ping();
 
-            mockClient.Verify(trc => trc.Execute<PingResult> (It.IsAny<IRestRequest>()), Times.Once);
+            mockClient.Verify(trc => trc.Execute<PingResult>(It.IsAny<IRestRequest>()), Times.Once);
             Assert.IsNotNull(savedRequest);
             Assert.AreEqual("ping", savedRequest.Resource);
             Assert.AreEqual(Method.GET, savedRequest.Method);

@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RestSharp;
+﻿using RestSharp;
+using RestSharp.Authenticators;
 
 namespace TextmagicRest
 {
     public class TextmagicAuthenticator : IAuthenticator
     {
-        public string Username { set; get; }
-        public string Token { set; get; }
-
-
         public TextmagicAuthenticator(string username, string token)
         {
             Username = username;
             Token = token;
         }
+
+        public string Username { set; get; }
+        public string Token { set; get; }
 
         public void Authenticate(IRestClient client, IRestRequest request)
         {

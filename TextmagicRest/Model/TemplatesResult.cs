@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using RestSharp.Deserializers;
 
 namespace TextmagicRest.Model
 {
     /// <summary>
-    /// List of Template objects
+    ///     List of Template objects
     /// </summary>
-    public class TemplatesResult: BaseModelList
+    public class TemplatesResult : BaseModelList
     {
-        [DeserializeAs(Name = "resources")]
-        public List<Template> Templates { get; set; }
+        [DeserializeAs(Name = "resources")] public List<Template> Templates { get; set; }
     }
 }

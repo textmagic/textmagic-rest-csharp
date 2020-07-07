@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextmagicRest", "TextmagicRest\TextmagicRest.csproj", "{2AA7CF5D-8E4C-4C6D-8871-26AFBE6C078F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextmagicRest", "TextmagicRest\TextmagicRest.csproj", "{9C0BE57D-E229-466B-9BF5-926B05748C5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextmagicRest.Tests", "TextmagicRest.Tests\TextmagicRest.Tests.csproj", "{72F18B6C-B09D-4D98-9633-1AED0DBF5EC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextmagicRest.Examples", "TextmagicRest.Examples\TextmagicRest.Examples.csproj", "{96ED518C-FD75-4776-AF89-41815129C56C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextmagicRest.Examples", "TextmagicRest.Examples\TextmagicRest.Examples.csproj", "{2072E259-422B-4F76-A874-01A50079CF67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextmagicRest.Tests", "TextmagicRest.Tests\TextmagicRest.Tests.csproj", "{BD0AE560-0FE6-45DE-B731-205916559BE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,20 +15,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2AA7CF5D-8E4C-4C6D-8871-26AFBE6C078F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2AA7CF5D-8E4C-4C6D-8871-26AFBE6C078F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2AA7CF5D-8E4C-4C6D-8871-26AFBE6C078F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2AA7CF5D-8E4C-4C6D-8871-26AFBE6C078F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72F18B6C-B09D-4D98-9633-1AED0DBF5EC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72F18B6C-B09D-4D98-9633-1AED0DBF5EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72F18B6C-B09D-4D98-9633-1AED0DBF5EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72F18B6C-B09D-4D98-9633-1AED0DBF5EC2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2072E259-422B-4F76-A874-01A50079CF67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2072E259-422B-4F76-A874-01A50079CF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2072E259-422B-4F76-A874-01A50079CF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2072E259-422B-4F76-A874-01A50079CF67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C0BE57D-E229-466B-9BF5-926B05748C5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0BE57D-E229-466B-9BF5-926B05748C5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0BE57D-E229-466B-9BF5-926B05748C5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0BE57D-E229-466B-9BF5-926B05748C5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96ED518C-FD75-4776-AF89-41815129C56C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96ED518C-FD75-4776-AF89-41815129C56C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96ED518C-FD75-4776-AF89-41815129C56C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96ED518C-FD75-4776-AF89-41815129C56C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD0AE560-0FE6-45DE-B731-205916559BE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD0AE560-0FE6-45DE-B731-205916559BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD0AE560-0FE6-45DE-B731-205916559BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD0AE560-0FE6-45DE-B731-205916559BE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87EAB391-E4AD-41BD-986D-70149CE430F5}
 	EndGlobalSection
 EndGlobal

@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using TextmagicRest;
-using TextmagicRest.Model;
 
-namespace textmagicsample
+namespace TextmagicRest.Examples
 {
-    class Program
+    public class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            sendMessage();
+            SendMessage();
 
             Console.WriteLine("Check your phone ;-)");
             Console.WriteLine("Press any key to continue . . . ");
             Console.ReadKey(true);
         }
 
-        public static void sendMessage()
+        public static void SendMessage()
         {
             var client = new Client("replace-with-username", "replace-with-user-api-key");
             var link = client.SendMessage("Hello from TextMagic API C# Wrapper demo application", "replace-with-phoneNumber-WithInternationalPrefix");

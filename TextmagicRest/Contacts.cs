@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Deserializers;
-using TextmagicRest.Model;
 using RestSharp.Validation;
+using TextmagicRest.Model;
 
 namespace TextmagicRest
 {
     public partial class Client
     {
         /// <summary>
-        /// Get a single contact.
+        ///     Get a single contact.
         /// </summary>
         /// <param name="id">Contact ID</param>
         /// <returns></returns>
@@ -30,7 +24,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user contacts
+        ///     Get all user contacts
         /// </summary>
         /// <returns></returns>
         public ContactsResult GetContacts()
@@ -39,7 +33,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user contacts.
+        ///     Get all user contacts.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -49,7 +43,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user contacts.
+        ///     Get all user contacts.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -60,7 +54,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user contacts.
+        ///     Get all user contacts.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -72,13 +66,13 @@ namespace TextmagicRest
             request.Resource = "contacts";
             if (page.HasValue) request.AddQueryParameter("page", page.ToString());
             if (limit.HasValue) request.AddQueryParameter("limit", limit.ToString());
-            if (includeShared.HasValue) request.AddQueryParameter("shared", (bool)includeShared? "1": "0");
+            if (includeShared.HasValue) request.AddQueryParameter("shared", (bool) includeShared ? "1" : "0");
 
             return Execute<ContactsResult>(request);
         }
 
         /// <summary>
-        /// Find user contacts by given parameters.
+        ///     Find user contacts by given parameters.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -87,7 +81,8 @@ namespace TextmagicRest
         /// <param name="listId">Find contact by List ID</param>
         /// <param name="query">Find contact by specified search query</param>
         /// <returns></returns>
-        public ContactsResult SearchContacts(int? page, int? limit, bool? includeShared, int[] ids, int? listId, string query)
+        public ContactsResult SearchContacts(int? page, int? limit, bool? includeShared, int[] ids, int? listId,
+            string query)
         {
             var request = new RestRequest();
             request.Resource = "contacts/search";
@@ -102,7 +97,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Create a new contact from the submitted data.
+        ///     Create a new contact from the submitted data.
         /// </summary>
         /// <param name="phone">Contact phone number in E.164 format</param>
         /// <param name="listIds">Array of List IDs this contact will be assigned to</param>
@@ -115,7 +110,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Create a new contact from the submitted data.
+        ///     Create a new contact from the submitted data.
         /// </summary>
         /// <param name="phone">Contact phone number in E.164 format</param>
         /// <param name="listIds">Array of List IDs this contact will be assigned to</param>
@@ -124,7 +119,8 @@ namespace TextmagicRest
         /// <param name="companyName">(Optional) Company name</param>
         /// <param name="email">(Optional) Email</param>
         /// <returns></returns>
-        public LinkResult CreateContact(string phone, int[] listIds, string firstName, string lastName, string companyName, string email)
+        public LinkResult CreateContact(string phone, int[] listIds, string firstName, string lastName,
+            string companyName, string email)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "contacts";
@@ -139,7 +135,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Update existing contact.
+        ///     Update existing contact.
         /// </summary>
         /// <param name="contact">Contact object</param>
         /// <param name="listIds">List IDs</param>
@@ -159,18 +155,14 @@ namespace TextmagicRest
             var result = Execute<LinkResult>(request);
 
             if (contact.CustomFields != null)
-            {
                 foreach (var customField in contact.CustomFields)
-                {
                     SetCustomFieldValue(customField.Id, contact.Id, customField.Value);
-                }
-            }
 
             return result;
         }
 
         /// <summary>
-        /// Delete a single contact.
+        ///     Delete a single contact.
         /// </summary>
         /// <param name="id">Contact ID</param>
         /// <returns></returns>
@@ -184,7 +176,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a single contact.
+        ///     Delete a single contact.
         /// </summary>
         /// <param name="contact">Contact object</param>
         /// <returns></returns>
@@ -194,7 +186,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all contact unsubscribed from your communication.
+        ///     Get all contact unsubscribed from your communication.
         /// </summary>
         /// <returns></returns>
         public UnsubscribedContactsResult GetUnsubscribedContacts()
@@ -203,7 +195,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all contact unsubscribed from your communication.
+        ///     Get all contact unsubscribed from your communication.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -211,9 +203,9 @@ namespace TextmagicRest
         {
             return GetUnsubscribedContacts(page, null);
         }
-        
+
         /// <summary>
-        /// Get all contact unsubscribed from your communication.
+        ///     Get all contact unsubscribed from your communication.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -229,7 +221,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get a single unsubscribed contact.
+        ///     Get a single unsubscribed contact.
         /// </summary>
         /// <param name="id">Unsubscribed contact ID</param>
         /// <returns></returns>
@@ -245,7 +237,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Unsubscribe contact from your communication.
+        ///     Unsubscribe contact from your communication.
         /// </summary>
         /// <param name="phone">Contact phone number (may not be in your contact list)</param>
         /// <returns></returns>
@@ -259,7 +251,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Unsubscribe contact from your communication.
+        ///     Unsubscribe contact from your communication.
         /// </summary>
         /// <param name="phone">Contact object</param>
         /// <returns></returns>
@@ -269,7 +261,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all available contact custom fields.
+        ///     Get all available contact custom fields.
         /// </summary>
         /// <returns></returns>
         public CustomFieldsResult GetCustomFields()
@@ -278,7 +270,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all available contact custom fields.
+        ///     Get all available contact custom fields.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -288,7 +280,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all available contact custom fields.
+        ///     Get all available contact custom fields.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -304,7 +296,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get a single custom field.
+        ///     Get a single custom field.
         /// </summary>
         /// <param name="id">Custom field ID</param>
         /// <returns></returns>
@@ -320,7 +312,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Create a new custom field.
+        ///     Create a new custom field.
         /// </summary>
         /// <param name="name">Custom field name</param>
         /// <returns></returns>
@@ -334,7 +326,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Update existing custom field.
+        ///     Update existing custom field.
         /// </summary>
         /// <param name="customField">CustomField update</param>
         /// <returns></returns>
@@ -349,7 +341,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a single custom field.
+        ///     Delete a single custom field.
         /// </summary>
         /// <param name="id">Custom field ID</param>
         /// <returns></returns>
@@ -363,7 +355,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a single custom field.
+        ///     Delete a single custom field.
         /// </summary>
         /// <param name="id">Custom field ID</param>
         /// <returns></returns>
@@ -373,7 +365,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Update/Set contact's custom field value.
+        ///     Update/Set contact's custom field value.
         /// </summary>
         /// <param name="id">Contact's custom field ID</param>
         /// <param name="contactId">Contact ID</param>
@@ -391,7 +383,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get lists which contact belongs to.
+        ///     Get lists which contact belongs to.
         /// </summary>
         /// <param name="id">Contact ID</param>
         /// <param name="page">Fetch specified results page</param>

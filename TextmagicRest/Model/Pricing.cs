@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TextmagicRest.Model
 {
     /// <summary>
-    /// Pricing information
+    ///     Pricing information
     /// </summary>
-    public class Pricing: BaseModel
+    public class Pricing : BaseModel
     {
         /// <summary>
-        /// Total session cost
+        ///     Total session cost
         /// </summary>
         public float Total { get; set; }
 
         /// <summary>
-        /// SMS parts count
+        ///     SMS parts count
         /// </summary>
         public int Parts { get; set; }
 
         /// <summary>
-        /// Price by country
+        ///     Price by country
         /// </summary>
         public Dictionary<string, CountryPricing> Countries { get; set; }
     }

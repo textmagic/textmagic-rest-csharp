@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Deserializers;
-using TextmagicRest.Model;
+﻿using RestSharp;
 using RestSharp.Validation;
+using TextmagicRest.Model;
 
 namespace TextmagicRest
 {
     public partial class Client
     {
         /// <summary>
-        /// Get a single template.
+        ///     Get a single template.
         /// </summary>
         /// <param name="id">Template ID</param>
         /// <returns></returns>
@@ -30,7 +23,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user templates.
+        ///     Get all user templates.
         /// </summary>
         /// <returns></returns>
         public TemplatesResult GetTemplates()
@@ -39,7 +32,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user templates.
+        ///     Get all user templates.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -49,7 +42,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user templates.
+        ///     Get all user templates.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -65,7 +58,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Find user templates by given parameters.
+        ///     Find user templates by given parameters.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -87,7 +80,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a single template.
+        ///     Delete a single template.
         /// </summary>
         /// <param name="id">Template ID</param>
         /// <returns></returns>
@@ -101,7 +94,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a single template.
+        ///     Delete a single template.
         /// </summary>
         /// <param name="template">Template object</param>
         /// <returns></returns>
@@ -111,7 +104,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Create a new template from the submitted data.
+        ///     Create a new template from the submitted data.
         /// </summary>
         /// <param name="name">Template name</param>
         /// <param name="content">Template text. May contain tags inside braces</param>
@@ -127,7 +120,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Update existing template.
+        ///     Update existing template.
         /// </summary>
         /// <param name="template">Template object</param>
         /// <returns></returns>

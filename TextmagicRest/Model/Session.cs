@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RestSharp.Deserializers;
 
 namespace TextmagicRest.Model
@@ -13,53 +9,53 @@ namespace TextmagicRest.Model
         WebApp = 'O',
         Tmm = 'T',
         EmailToSms = 'E',
-        DistributionList = 'X'        
+        DistributionList = 'X'
     }
 
     /// <summary>
-    /// Message sending session
+    ///     Message sending session
     /// </summary>
-    public class Session: BaseModel
+    public class Session : BaseModel
     {
         /// <summary>
-        /// Session ID
+        ///     Session ID
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Sesssion start time
+        ///     Sesssion start time
         /// </summary>
         public DateTime? StartTime { get; set; }
 
         /// <summary>
-        /// Session text. Contains
+        ///     Session text. Contains
         /// </summary>
         public string Text { get; set; }
 
-        [DeserializeAs(Name="source")]
-        public char SourceChar { get; set; }
+        [DeserializeAs(Name = "source")] public char SourceChar { get; set; }
+
         /// <summary>
-        /// Session sending source
+        ///     Session sending source
         /// </summary>
         [DeserializeAs(Name = "fake-unused-name")]
-        public SendingSource Source 
+        public SendingSource Source
         {
-            get { return (SendingSource)SourceChar; }
-            set { SourceChar = value.ToString()[0]; } 
+            get => (SendingSource) SourceChar;
+            set => SourceChar = value.ToString()[0];
         }
 
         /// <summary>
-        /// Custom Reference ID
+        ///     Custom Reference ID
         /// </summary>
         public string ReferenceId { get; set; }
 
         /// <summary>
-        /// Session price (in account currency)
+        ///     Session price (in account currency)
         /// </summary>
         public float Price { get; set; }
 
         /// <summary>
-        /// Session unique recipients count
+        ///     Session unique recipients count
         /// </summary>
         public int NumbersCount { get; set; }
     }

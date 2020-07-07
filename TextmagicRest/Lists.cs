@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Deserializers;
-using TextmagicRest.Model;
 using RestSharp.Validation;
+using TextmagicRest.Model;
 
 namespace TextmagicRest
 {
     public partial class Client
     {
         /// <summary>
-        /// Get a single list.
+        ///     Get a single list.
         /// </summary>
         /// <param name="id">List ID</param>
         /// <returns></returns>
@@ -30,7 +24,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user lists.
+        ///     Get all user lists.
         /// </summary>
         /// <returns></returns>
         public ContactListsResult GetLists()
@@ -39,7 +33,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user lists.
+        ///     Get all user lists.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <returns></returns>
@@ -49,7 +43,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Get all user lists.
+        ///     Get all user lists.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -65,7 +59,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Find contact lists by given parameters.
+        ///     Find contact lists by given parameters.
         /// </summary>
         /// <param name="page">Fetch specified results page</param>
         /// <param name="limit">How many results to return</param>
@@ -85,7 +79,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Create a new list from the submitted data.
+        ///     Create a new list from the submitted data.
         /// </summary>
         /// <param name="name">List name</param>
         /// <returns></returns>
@@ -95,7 +89,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Create a new list from the submitted data.
+        ///     Create a new list from the submitted data.
         /// </summary>
         /// <param name="name">List name</param>
         /// <param name="shared">(Optional) Should this list be shared with sub-accounts</param>
@@ -105,13 +99,13 @@ namespace TextmagicRest
             var request = new RestRequest(Method.POST);
             request.Resource = "lists";
             request.AddParameter("name", name);
-            if (shared.HasValue) request.AddParameter("shared", (bool)shared? "1": "0");
+            if (shared.HasValue) request.AddParameter("shared", (bool) shared ? "1" : "0");
 
             return Execute<LinkResult>(request);
         }
 
         /// <summary>
-        /// Update existing list.
+        ///     Update existing list.
         /// </summary>
         /// <param name="list">ContactList object</param>
         /// <returns></returns>
@@ -121,13 +115,13 @@ namespace TextmagicRest
             request.Resource = "lists/{id}";
             request.AddUrlSegment("id", list.Id.ToString());
             request.AddParameter("name", list.Name);
-            request.AddParameter("shared", list.Shared? "1" : "0");
+            request.AddParameter("shared", list.Shared ? "1" : "0");
 
             return Execute<LinkResult>(request);
         }
 
         /// <summary>
-        /// Delete a single list.
+        ///     Delete a single list.
         /// </summary>
         /// <param name="id">List ID</param>
         /// <returns></returns>
@@ -141,7 +135,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Delete a single list.
+        ///     Delete a single list.
         /// </summary>
         /// <param name="id">List ID</param>
         /// <returns></returns>
@@ -151,7 +145,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Fetch user contacts by given list id.
+        ///     Fetch user contacts by given list id.
         /// </summary>
         /// <param name="list">ContactList object</param>
         /// <param name="page">Fetch specified results page</param>
@@ -163,7 +157,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Fetch user contacts by given list id.
+        ///     Fetch user contacts by given list id.
         /// </summary>
         /// <param name="id">List ID</param>
         /// <param name="page">Fetch specified results page</param>
@@ -181,7 +175,7 @@ namespace TextmagicRest
         }
 
         /// <summary>
-        /// Assign contacts to the specified list.
+        ///     Assign contacts to the specified list.
         /// </summary>
         /// <param name="id">List ID</param>
         /// <param name="contactIds">Contact IDs</param>
@@ -191,30 +185,28 @@ namespace TextmagicRest
             var request = new RestRequest(Method.PUT);
             request.Resource = "lists/{id}/contacts";
             request.AddUrlSegment("id", id.ToString());
-            if (contactIds != null && contactIds.Length > 0) request.AddParameter("contacts", string.Join(",", contactIds));
+            if (contactIds != null && contactIds.Length > 0)
+                request.AddParameter("contacts", string.Join(",", contactIds));
 
             return Execute<LinkResult>(request);
         }
 
         /// <summary>
-        /// Assign contacts to the specified list.
+        ///     Assign contacts to the specified list.
         /// </summary>
         /// <param name="list">ContactList object</param>
         /// <param name="contacts">Contacts</param>
         /// <returns></returns>
         public LinkResult AddContactsToList(ContactList list, List<Contact> contacts)
         {
-            List<int> contactIds = new List<int>();
-            foreach (var contact in contacts)
-            {
-                contactIds.Add(contact.Id);
-            }
+            var contactIds = new List<int>();
+            foreach (var contact in contacts) contactIds.Add(contact.Id);
 
             return AddContactsToList(list.Id, contactIds.ToArray());
         }
 
         /// <summary>
-        /// Unassign contacts from the specified list.
+        ///     Unassign contacts from the specified list.
         /// </summary>
         /// <param name="id">List ID</param>
         /// <param name="contactIds">Contact IDs</param>
@@ -224,24 +216,22 @@ namespace TextmagicRest
             var request = new RestRequest(Method.DELETE);
             request.Resource = "lists/{id}/contacts";
             request.AddUrlSegment("id", id.ToString());
-            if (contactIds != null && contactIds.Length > 0) request.AddParameter("contacts", string.Join(",", contactIds));
+            if (contactIds != null && contactIds.Length > 0)
+                request.AddParameter("contacts", string.Join(",", contactIds));
 
             return Execute<DeleteResult>(request);
         }
 
         /// <summary>
-        /// Unassign contacts from the specified list.
+        ///     Unassign contacts from the specified list.
         /// </summary>
         /// <param name="list">ContactList object</param>
         /// <param name="contacts">Contacts</param>
         /// <returns></returns>
         public DeleteResult DeleteContactsFromList(ContactList list, List<Contact> contacts)
         {
-            List<int> contactIds = new List<int>();
-            foreach (var contact in contacts)
-            {
-                contactIds.Add(contact.Id);
-            }
+            var contactIds = new List<int>();
+            foreach (var contact in contacts) contactIds.Add(contact.Id);
 
             return DeleteContactsFromList(list.Id, contactIds.ToArray());
         }
