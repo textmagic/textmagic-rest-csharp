@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RestSharp;
+﻿using RestSharp;
 using System.Net;
 using Moq;
-using RestSharp.Deserializers;
+using RestSharp.Serialization.Json;
 
 namespace TextmagicRest.Tests
 {
